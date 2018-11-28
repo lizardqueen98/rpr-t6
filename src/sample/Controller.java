@@ -21,6 +21,9 @@ public class Controller {
     public TextField adresa;
     public TextField telefon;
     public TextField mail;
+    public ChoiceBox<String> odsjek;
+    public ChoiceBox<String> godina;
+    public ChoiceBox<String> ciklus;
     private SimpleStringProperty name, last_name, index, JMBG, date, adress, phone, email;
     public Controller(){
         name=new SimpleStringProperty();
@@ -42,6 +45,9 @@ public class Controller {
         adresa.textProperty().bindBidirectional(adress);
         telefon.textProperty().bindBidirectional(phone);
         mail.textProperty().bindBidirectional(email);
+        odsjek.getItems().addAll("AE","EE","RI","TK");
+        godina.getItems().addAll("prva","druga","treca");
+        ciklus.getItems().addAll("bachelor", "master", "doktorski studij", "stručni studij");
     }
     public SimpleStringProperty nameProperty() {
         return name;
@@ -79,8 +85,21 @@ public class Controller {
     public String getAdress(){
         return adress.get();
     }
+    public SimpleStringProperty phoneProperty(){
+        return phone;
+    }
+    public String getPhone(){
+        return phone.get();
+    }
+    public SimpleStringProperty emailProperty(){
+        return email;
+    }
+    public String getEmail(){
+        return email.get();
+    }
     public void potvrdi(javafx.event.ActionEvent actionEvent) {
-        System.out.println(getName()+" "+getLastName()+" "+getIndex()+" "+getJMBG()+" "+getDate()+" "+izbor.getValue());
+        System.out.println(getName()+" "+getLastName()+" "+getIndex()+" "+getJMBG()+" "+getDate()+" "+izbor.getValue()
+        +" "+getAdress()+" "+getPhone()+" "+getEmail()+" "+odsjek.getValue()+" "+godina.getValue()+" "+ciklus.getValue());
     }
 
 }
