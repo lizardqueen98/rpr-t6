@@ -1,10 +1,7 @@
 package sample;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.awt.event.ActionEvent;
 
@@ -98,7 +95,8 @@ public class Controller {
         return email.get();
     }
     public void potvrdi(javafx.event.ActionEvent actionEvent) {
-        System.out.println(getName()+" "+getLastName()+" "+getIndex()+" "+getJMBG()+" "+getDate()+" "+izbor.getValue()
+
+        System.out.print(getName()+" "+getLastName()+" "+getIndex()+" "+getJMBG()+" "+getDate()+" "+izbor.getValue()
         +" "+getAdress()+" "+getPhone()+" "+getEmail()+" "+odsjek.getValue()+" "+godina.getValue()+" "+ciklus.getValue());
     }
 
