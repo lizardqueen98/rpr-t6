@@ -26,16 +26,16 @@ public class Controller {
     public RadioButton redovan;
     public RadioButton samofinansirajuci;
     private ToggleGroup dugmad;
-    private SimpleStringProperty name, last_name, index, JMBG, date, adress, phone, email;
+    //private SimpleStringProperty name, last_name, index, JMBG, date, adress, phone, email;
     public Controller(){
-        name=new SimpleStringProperty();
+        /*name=new SimpleStringProperty();
         last_name=new SimpleStringProperty();
         index=new SimpleStringProperty();
         JMBG=new SimpleStringProperty();
         date=new SimpleStringProperty();
         adress=new SimpleStringProperty();
         phone=new SimpleStringProperty();
-        email=new SimpleStringProperty();
+        email=new SimpleStringProperty();*/
         dugmad=new ToggleGroup();
     }
     public void initialize() {
@@ -45,6 +45,7 @@ public class Controller {
         ciklus.getItems().addAll("bachelor", "master", "doktorski studij", "stručni studij");
         redovan.setToggleGroup(dugmad);
         samofinansirajuci.setToggleGroup(dugmad);
+
         ime.textProperty().addListener(new ChangeListener<String>(){
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String staro, String novo){
@@ -69,16 +70,50 @@ public class Controller {
                 }
             }
         });
-        ime.textProperty().bindBidirectional(name);
+        broj_indeksa.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String staro, String novo){
+                if (validanIndeks(novo)) {
+                    broj_indeksa.getStyleClass().removeAll("poljeNijeIspravno");
+                    broj_indeksa.getStyleClass().add("poljeIspravno");
+                } else {
+                    broj_indeksa.getStyleClass().removeAll("poljeIspravno");
+                    broj_indeksa.getStyleClass().add("poljeNijeIspravno");
+                }
+            }
+        });
+        jmbg.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String staro, String novo){
+                if (validanJmbg(novo)) {
+                    jmbg.getStyleClass().removeAll("poljeNijeIspravno");
+                    jmbg.getStyleClass().add("poljeIspravno");
+                } else {
+                    jmbg.getStyleClass().removeAll("poljeIspravno");
+                    jmbg.getStyleClass().add("poljeNijeIspravno");
+                }
+            }
+        });
+        /*ime.textProperty().bindBidirectional(name);
         prezime.textProperty().bindBidirectional(last_name);
         broj_indeksa.textProperty().bindBidirectional(index);
         jmbg.textProperty().bindBidirectional(JMBG);
         datum.textProperty().bindBidirectional(date);
         adresa.textProperty().bindBidirectional(adress);
         telefon.textProperty().bindBidirectional(phone);
-        mail.textProperty().bindBidirectional(email);
+        mail.textProperty().bindBidirectional(email);*/
     }
-    public SimpleStringProperty nameProperty() {
+
+    private boolean validanJmbg(String novo) {
+
+    }
+
+    private boolean validanIndeks(String novo) {
+        if(novo.length()!=5) return false;
+        return true;
+    }
+
+    /*public SimpleStringProperty nameProperty() {
         return name;
     }
     public String getName() {
@@ -126,27 +161,15 @@ public class Controller {
     public String getEmail(){
         return email.get();
     }
-
-    /*ime.textProperty().addListener(new ChangeListener<String>() {
-        @Override
-        public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-            if (validnoImePrezime(n)) {
-                name.getStyleClass().removeAll("poljeNijeIspravno");
-                name.getStyleClass().add("poljeIspravno");
-            } else {
-                imePrezimeField.getStyleClass().removeAll("poljeIspravno");
-                imePrezimeField.getStyleClass().add("poljeNijeIspravno");
-            }
-        }
-    });*/
+    */
     public boolean validnoIme(String novo_ime){
         if(novo_ime.length()>20 || novo_ime.length()<=0) return false;
         return true;
     }
     public void potvrdi(javafx.event.ActionEvent actionEvent) {
 
-        System.out.print(getName()+" "+getLastName()+" "+getIndex()+" "+getJMBG()+" "+getDate()+" "+izbor.getValue()
-        +" "+getAdress()+" "+getPhone()+" "+getEmail()+" "+odsjek.getValue()+" "+godina.getValue()+" "+ciklus.getValue());
+        System.out.print(ime.getText()+" "+prezime.getText()+" "+broj_indeksa.getText()+" "+jmbg.getText()+" "+datum.getText()+" "+izbor.getValue()
+        +" "+adresa.getText()+" "+telefon.getText()+" "+mail.getText()+" "+odsjek.getValue()+" "+godina.getValue()+" "+ciklus.getValue());
         if(dugmad.getSelectedToggle().equals(redovan)) System.out.print(" redovan");
         if(dugmad.getSelectedToggle().equals(samofinansirajuci)) System.out.print(" samofinansirajuci");
     }

@@ -1,18 +1,27 @@
 #grid1 {
+          -fx-padding: 10 10 10 10;
           -fx-border-color: lightGrey;
           -fx-border-width: 2;
           -fx-border-radius: 2px;
     }
 #grid2 {
+              -fx-padding: 10 10 10 10;
               -fx-border-color: lightGrey;
               -fx-border-width: 2;
               -fx-border-radius: 2px;
         }
 #grid3 {
+               -fx-padding: 10 10 10 10;
               -fx-border-color: lightGrey;
               -fx-border-width: 2;
               -fx-border-radius: 2px;
         }
+        #grid4 {
+                       -fx-padding: 10 10 10 10;
+                      -fx-border-color: lightGrey;
+                      -fx-border-width: 2;
+                      -fx-border-radius: 2px;
+                }
 
         .poljeIspravno {
            -fx-control-inner-background: greenyellow;
