@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
+import org.apache.commons.validator.routines.EmailValidator;
 
 import java.awt.event.ActionEvent;
 
@@ -94,6 +95,56 @@ public class Controller {
                 }
             }
         });
+        datum.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String staro, String novo){
+                if (validanDatum(novo)) {
+                    datum.getStyleClass().removeAll("poljeNijeIspravno");
+                    datum.getStyleClass().add("poljeIspravno");
+                } else {
+                    datum.getStyleClass().removeAll("poljeIspravno");
+                    datum.getStyleClass().add("poljeNijeIspravno");
+                }
+            }
+        });
+        adresa.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String staro, String novo){
+                if (validnaAdresa(novo)) {
+                    adresa.getStyleClass().removeAll("poljeNijeIspravno");
+                    adresa.getStyleClass().add("poljeIspravno");
+                } else {
+                    adresa.getStyleClass().removeAll("poljeIspravno");
+                    adresa.getStyleClass().add("poljeNijeIspravno");
+                }
+            }
+        });
+        telefon.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String staro, String novo){
+                if (validanTelefon(novo)) {
+                    telefon.getStyleClass().removeAll("poljeNijeIspravno");
+                    telefon.getStyleClass().add("poljeIspravno");
+                } else {
+                    telefon.getStyleClass().removeAll("poljeIspravno");
+                    telefon.getStyleClass().add("poljeNijeIspravno");
+                }
+            }
+        });
+        mail.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> obs, String o, String n) {
+                EmailValidator validator = EmailValidator.getInstance();
+                if (validator.isValid(n)) {
+                    mail.getStyleClass().removeAll("poljeNijeIspravno");
+                    mail.getStyleClass().add("poljeIspravno");
+                } else {
+                    mail.getStyleClass().removeAll("poljeIspravno");
+                    mail.getStyleClass().add("poljeNijeIspravno");
+                }
+            }
+        });
+
         /*ime.textProperty().bindBidirectional(name);
         prezime.textProperty().bindBidirectional(last_name);
         broj_indeksa.textProperty().bindBidirectional(index);
@@ -104,8 +155,20 @@ public class Controller {
         mail.textProperty().bindBidirectional(email);*/
     }
 
-    private boolean validanJmbg(String novo) {
+    private boolean validanTelefon(String novo) {
+        return true;
+    }
 
+    private boolean validnaAdresa(String novo) {
+        return true;
+    }
+
+    private boolean validanDatum(String novo) {
+        return true;
+    }
+
+    private boolean validanJmbg(String novo) {
+        return true;
     }
 
     private boolean validanIndeks(String novo) {
