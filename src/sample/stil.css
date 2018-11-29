@@ -1,0 +1,22 @@
+#grid1 {
+          -fx-border-color: lightGrey;
+          -fx-border-width: 2;
+          -fx-border-radius: 2px;
+    }
+#grid2 {
+              -fx-border-color: lightGrey;
+              -fx-border-width: 2;
+              -fx-border-radius: 2px;
+        }
+#grid3 {
+              -fx-border-color: lightGrey;
+              -fx-border-width: 2;
+              -fx-border-radius: 2px;
+        }
+
+        .poljeIspravno {
+           -fx-control-inner-background: greenyellow;
+        }
+        .poljeNijeIspravno {
+           -fx-control-inner-background: red;
+        }
