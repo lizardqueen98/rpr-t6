@@ -52,6 +52,7 @@ public class Controller {
     public ChoiceBox<String> ciklus;
     public RadioButton redovan;
     public RadioButton samofinansirajuci;
+    public CheckBox check;
     private ToggleGroup dugmad;
     public Controller(){
         dugmad=new ToggleGroup();
@@ -289,7 +290,7 @@ public class Controller {
     }
 
     private boolean validanIndeks(String novo) {
-        if(novo.length()!=5 && !novo.matches("[0-9]+")) return false;
+        if(novo.length()!=5 || !novo.matches("[0-9]+")) return false;
         return true;
     }
 
@@ -310,6 +311,7 @@ public class Controller {
         +" "+adresa.getText()+" "+telefon.getText()+" "+mail.getText()+" "+odsjek.getValue()+" "+godina.getValue()+" "+ciklus.getValue());
         if(dugmad.getSelectedToggle().equals(redovan)) System.out.print(" redovan");
         if(dugmad.getSelectedToggle().equals(samofinansirajuci)) System.out.print(" samofinansirajuci");
+        if(check.isSelected()) System.out.print(" pripada posebnim borackim kategorijama");
     }
 
 }

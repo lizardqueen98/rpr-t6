@@ -32,35 +32,35 @@ class MainTest {
     }
 
     @Test
-    public void imeTacnoNaPocetku(FxRobot robot){
+    public void imeTacnoPrijeUnosa(FxRobot robot){
         robot.clickOn("#ime");
         TextField imePolje = robot.lookup("#ime").queryAs(TextField.class);
         assertEquals("",imePolje.getText());
     }
 
     @Test
-    public void prezimeTacnoNaPocetku(FxRobot robot){
+    public void prezimeTacnoPrijeUnosa(FxRobot robot){
         robot.clickOn("#prezime");
         TextField prezimePolje = robot.lookup("#prezime").queryAs(TextField.class);
         assertEquals("",prezimePolje.getText());
     }
 
     @Test
-    public void indeksTacanNaPocetku(FxRobot robot){
+    public void indeksTacanPrijeUnosa(FxRobot robot){
         robot.clickOn("#broj_indeksa");
         TextField indeksPolje = robot.lookup("#broj_indeksa").queryAs(TextField.class);
         assertEquals("",indeksPolje.getText());
     }
 
     @Test
-    public void jmbgTacanNaPocetku(FxRobot robot){
+    public void jmbgTacanPrijeUnosa(FxRobot robot){
         robot.clickOn("#jmbg");
         TextField jmbgPolje = robot.lookup("#jmbg").queryAs(TextField.class);
         assertEquals("",jmbgPolje.getText());
     }
 
     @Test
-    public void  kontaktAdresaTacnaNaPocetku(FxRobot robot)
+    public void kontaktAdresaTacnaPrijeUnosa(FxRobot robot)
     {
         robot.clickOn("#adresa");
         TextField kontaktAdresaPolje = robot.lookup("#adresa").queryAs(TextField.class);
@@ -68,21 +68,21 @@ class MainTest {
     }
 
     @Test
-    public void  kontaktTelefonTacanNaPocetku(FxRobot robot){
+    public void  kontaktTelefonTacanPrijeUnosa(FxRobot robot){
         robot.clickOn("#telefon");
         TextField kontaktTelefonPolje = robot.lookup("#telefon").queryAs(TextField.class);
         assertEquals("",kontaktTelefonPolje.getText());
     }
 
     @Test
-    public void  emailTacanNaPocetku(FxRobot robot){
+    public void  emailTacanPrijeUnosa(FxRobot robot){
         robot.clickOn("#mail");
         TextField emailPolje = robot.lookup("#mail").queryAs(TextField.class);
         assertEquals("",emailPolje.getText());
     }
 
     @Test
-    public void  imeTacnoOtkucano(FxRobot robot){
+    public void imeTacnoUneseno(FxRobot robot){
         robot.clickOn("#ime");
         TextField imePolje = robot.lookup("#ime").queryAs(TextField.class);
         robot.write("Nadija");
@@ -90,7 +90,7 @@ class MainTest {
     }
 
     @Test
-    public void  imeNetacnoOtkucano(FxRobot robot){
+    public void imeNetacnoUneseno(FxRobot robot){
         robot.clickOn("#ime");
         TextField imePolje = robot.lookup("#ime").queryAs(TextField.class);
         robot.write("Nadija");
@@ -112,7 +112,7 @@ class MainTest {
     }
 
     @Test
-    public void  prezimeTacnoOtkucano(FxRobot robot){
+    public void prezimeTacnoUneseno(FxRobot robot){
         robot.clickOn("#prezime");
         TextField prezimePolje = robot.lookup("#prezime").queryAs(TextField.class);
         robot.write("Borovina");
@@ -120,7 +120,7 @@ class MainTest {
     }
 
     @Test
-    public void  prezimeNetacnoOtkucano(FxRobot robot)
+    public void prezimeNetacnoUneseno(FxRobot robot)
     {
         robot.clickOn("#prezime");
         TextField prezimePolje = robot.lookup("#prezime").queryAs(TextField.class);
@@ -145,7 +145,7 @@ class MainTest {
     }
 
     @Test
-    public void indeksTacnoOtkucan(FxRobot robot)
+    public void indeksTacnoUnesen(FxRobot robot)
     {
         robot.clickOn("#broj_indeksa");
         TextField indeksPolje = robot.lookup("#broj_indeksa").queryAs(TextField.class);
@@ -154,7 +154,7 @@ class MainTest {
     }
 
     @Test
-    public void  indeksNetacnoOtkucan(FxRobot robot)
+    public void indeksNetacnoUnesen(FxRobot robot)
     {
         robot.clickOn("#broj_indeksa");
         TextField indeksPolje = robot.lookup("#broj_indeksa").queryAs(TextField.class);
@@ -181,7 +181,7 @@ class MainTest {
     }
 
     @Test
-    public void  jmbgTacnoOtkucan(FxRobot robot)
+    public void jmbgTacnoUnesen(FxRobot robot)
     {
         robot.clickOn("#jmbg");
         TextField jmbgPolje = robot.lookup("#jmbg").queryAs(TextField.class);
@@ -190,7 +190,7 @@ class MainTest {
     }
 
     @Test
-    public void  jmbgNetacnoOtkucan(FxRobot robot){
+    public void  jmbgNetacnoUnesen(FxRobot robot){
         robot.clickOn("#jmbg");
         TextField jmbgPolje = robot.lookup("#jmbg").queryAs(TextField.class);
         robot.write("2108998175006");
@@ -221,7 +221,7 @@ class MainTest {
     }
 
     @Test
-    public void  kontaktTelefonTacnoOtkucan(FxRobot robot){
+    public void  kontaktTelefonTacnoUnesen(FxRobot robot){
         robot.clickOn("#telefon");
         TextField kontaktTelefonPolje = robot.lookup("#telefon").queryAs(TextField.class);
         robot.write("062119900");
@@ -229,7 +229,7 @@ class MainTest {
     }
 
     @Test
-    public void  kontaktTelefonNetacnoOtkucan(FxRobot robot){
+    public void  kontaktTelefonNetacnoUnesen(FxRobot robot){
         robot.clickOn("#telefon");
         TextField kontaktTelefonPolje = robot.lookup("#telefon").queryAs(TextField.class);
         robot.write("246387658745");
@@ -253,7 +253,7 @@ class MainTest {
     }
 
     @Test
-    public void  kontaktAdresaTacnoOtkucana(FxRobot robot){
+    public void  kontaktAdresaTacnoUnesena(FxRobot robot){
         robot.clickOn("#adresa");
         TextField kontaktAdresaPolje = robot.lookup("#adresa").queryAs(TextField.class);
         robot.write("Radnicka 19");
@@ -265,7 +265,7 @@ class MainTest {
     }
 
     @Test
-    public void  emailTacnoOtkucan(FxRobot robot){
+    public void emailTacnoUnesen(FxRobot robot){
         robot.clickOn("#mail");
         TextField emailPolje = robot.lookup("#mail").queryAs(TextField.class);
         robot.write("nadija.b@gmail.com");
@@ -273,7 +273,7 @@ class MainTest {
     }
 
     @Test
-    public void  emailNetacnoOtkucan(FxRobot robot){
+    public void emailNetacnoUnesen(FxRobot robot){
         robot.clickOn("#mail");
         TextField emailPolje = robot.lookup("#mail").queryAs(TextField.class);
         robot.write("nborovina1@etf.unsa.ba");
