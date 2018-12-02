@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.ZoneId;
+import java.util.Date;
 
 
 public class Controller {
@@ -28,16 +30,7 @@ public class Controller {
     public RadioButton redovan;
     public RadioButton samofinansirajuci;
     private ToggleGroup dugmad;
-    //private SimpleStringProperty name, last_name, index, JMBG, date, adress, phone, email;
     public Controller(){
-        /*name=new SimpleStringProperty();
-        last_name=new SimpleStringProperty();
-        index=new SimpleStringProperty();
-        JMBG=new SimpleStringProperty();
-        date=new SimpleStringProperty();
-        adress=new SimpleStringProperty();
-        phone=new SimpleStringProperty();
-        email=new SimpleStringProperty();*/
         dugmad=new ToggleGroup();
     }
     public void initialize() {
@@ -146,14 +139,6 @@ public class Controller {
             }
         });
 */
-        /*ime.textProperty().bindBidirectional(name);
-        prezime.textProperty().bindBidirectional(last_name);
-        broj_indeksa.textProperty().bindBidirectional(index);
-        jmbg.textProperty().bindBidirectional(JMBG);
-        datum.textProperty().bindBidirectional(date);
-        adresa.textProperty().bindBidirectional(adress);
-        telefon.textProperty().bindBidirectional(phone);
-        mail.textProperty().bindBidirectional(email);*/
     }
 
     private boolean validanTelefon(String novo) {
@@ -177,6 +162,21 @@ public class Controller {
     }
 
     private boolean validanDatum(LocalDate novo) {
+
+        int dd = Integer.parseInt(jmbg.getText(0, 2));
+        int mm = Integer.parseInt(jmbg.getText(2, 4));
+        int ggg = Integer.parseInt(jmbg.getText(4, 7));
+
+
+        if(ggg != novo.getYear()%1000)
+            return false;
+
+        if(mm != novo.getMonthValue())
+            return false;
+
+        if(dd != novo.getDayOfMonth())
+            return false;
+
         return true;
     }
 
@@ -231,7 +231,7 @@ public class Controller {
     }
     public void potvrdi(javafx.event.ActionEvent actionEvent) {
 
-        System.out.print(ime.getText()+" "+prezime.getText()+" "+broj_indeksa.getText()+" "+jmbg.getText()+" "+datum.toString()+" "+izbor.getValue()
+        System.out.print(ime.getText()+" "+prezime.getText()+" "+broj_indeksa.getText()+" "+jmbg.getText()+" "+datum.getValue()+" "+izbor.getValue()
         +" "+adresa.getText()+" "+telefon.getText()+" "+mail.getText()+" "+odsjek.getValue()+" "+godina.getValue()+" "+ciklus.getValue());
         if(dugmad.getSelectedToggle().equals(redovan)) System.out.print(" redovan");
         if(dugmad.getSelectedToggle().equals(samofinansirajuci)) System.out.print(" samofinansirajuci");
