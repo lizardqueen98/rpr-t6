@@ -4,13 +4,36 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
+import org.controlsfx.validation.ValidationSupport;
 //import org.apache.commons.validator.routines.EmailValidator;
-
-import java.awt.event.ActionEvent;
+import org.controlsfx.validation.Validator;
+//import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.Date;
+//import javafx.beans.value.ChangeListener;
+//import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+
+import javafx.stage.Stage;
+import org.controlsfx.validation.Validator;
+
+
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.ResourceBundle;
+
+import org.controlsfx.validation.ValidationSupport;
 
 
 public class Controller {
@@ -140,7 +163,52 @@ public class Controller {
         });
 */
     }
+    /*ValidationSupport validation = new ValidationSupport();
+        ime.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
+            if(!n)
+                validation.registerValidator(ime, Validator.createEmptyValidator("Prazno polje"));
+        }
+    });
+       prezime.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
+            if(!n)
+                validation.registerValidator(prezime,Validator.createEmptyValidator("Prazno polje"));
+        }
+    });
+        jmbg.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
+            if(!n)
+                validation.registerValidator(jmbg, Validator.createEmptyValidator("Prazno polje"));
+        }
+    });
+        mail.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
+            if(!n)
+                validation.registerValidator(mail,Validator.createEmptyValidator("Prazno polje"));
+        }
+    });
+        broj_indeksa.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
+            if(!n)
+                validation.registerValidator(broj_indeksa,Validator.createEmptyValidator("Prazno polje"));
+        }
+    });
+        datum.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
+            if(!n)
+                validation.registerValidator(datum,Validator.createEmptyValidator("Prazno polje"));
+        }
+    });
 
+}
+*/
     private boolean validanTelefon(String novo) {
         return novo.matches("[0-9]+");
     }
@@ -221,12 +289,19 @@ public class Controller {
     }
 
     private boolean validanIndeks(String novo) {
-        if(novo.length()!=5) return false;
+        if(novo.length()!=5 && !novo.matches("[0-9]+")) return false;
         return true;
     }
 
     public boolean validnoIme(String novo_ime){
         if(novo_ime.length()>20 || novo_ime.length()<=0) return false;
+        if(!novo_ime.matches("[a-zA-Z]+")) return false;
+        if(Character.isLowerCase(novo_ime.charAt(0))) return false;
+        for(int i=1; i<novo_ime.length(); i++)
+        {
+            if(Character.isUpperCase(novo_ime.charAt(i)))
+                return false;
+        }
         return true;
     }
     public void potvrdi(javafx.event.ActionEvent actionEvent) {
