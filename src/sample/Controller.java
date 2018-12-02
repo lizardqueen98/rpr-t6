@@ -4,19 +4,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
-import org.apache.commons.validator.routines.EmailValidator;
+//import org.apache.commons.validator.routines.EmailValidator;
 
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
+import java.time.YearMonth;
 
 
 public class Controller {
 
     public TextField ime;
-
     public TextField prezime;
     public TextField broj_indeksa;
     public TextField jmbg;
-    public TextField datum;
+    public DatePicker datum;
     public ComboBox izbor;
     public TextField adresa;
     public TextField telefon;
@@ -95,9 +96,9 @@ public class Controller {
                 }
             }
         });
-        datum.textProperty().addListener(new ChangeListener<String>(){
+        datum.valueProperty().addListener(new ChangeListener<LocalDate>(){
             @Override
-            public void changed(ObservableValue<? extends String> observableValue, String staro, String novo){
+            public void changed(ObservableValue<? extends LocalDate> observableValue, LocalDate staro, LocalDate novo){
                 if (validanDatum(novo)) {
                     datum.getStyleClass().removeAll("poljeNijeIspravno");
                     datum.getStyleClass().add("poljeIspravno");
@@ -131,7 +132,7 @@ public class Controller {
                 }
             }
         });
-        mail.textProperty().addListener(new ChangeListener<String>() {
+        /*mail.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> obs, String o, String n) {
                 EmailValidator validator = EmailValidator.getInstance();
@@ -144,7 +145,7 @@ public class Controller {
                 }
             }
         });
-
+*/
         /*ime.textProperty().bindBidirectional(name);
         prezime.textProperty().bindBidirectional(last_name);
         broj_indeksa.textProperty().bindBidirectional(index);
@@ -156,18 +157,66 @@ public class Controller {
     }
 
     private boolean validanTelefon(String novo) {
-        return true;
+        return novo.matches("[0-9]+");
     }
 
     private boolean validnaAdresa(String novo) {
+        if(novo.length()==0)
+            return false;
+
+        if(!novo.contains(" "))
+            return false;
+
+        String ime_ulice = novo.substring(0, novo.indexOf(' '));
+        String broj_ulice = novo.substring(novo.indexOf(' ')+1, novo.length());
+
+        if(!ime_ulice.matches("[a-zA-Z]+") || !broj_ulice.matches("[0-9]+"))
+            return false;
+
         return true;
     }
 
-    private boolean validanDatum(String novo) {
+    private boolean validanDatum(LocalDate novo) {
         return true;
     }
 
     private boolean validanJmbg(String novo) {
+
+        if(novo.length()!=13)
+            return false;
+
+        if(!novo.matches("[0-9]+")) 
+            return false;
+
+        int dd = Integer.parseInt( novo.substring(0,2) );
+        int mm = Integer.parseInt( novo.substring(2,4) );
+        int ggg = Integer.parseInt( novo.substring(4,7) );
+
+        if( dd < 1 || dd > YearMonth.of(ggg, mm).lengthOfMonth() )
+            return false;
+
+        if(mm>12 || mm<0)
+            return false;
+
+        if(ggg>18 && ggg<0)
+            return false;
+
+        int k = Integer.parseInt(novo.substring(12, 13));
+
+        int l = 11 - ((7*(Integer.parseInt(jmbg.getText(0,1)) + Integer.parseInt(jmbg.getText(6,7))) +
+                6*(Integer.parseInt(jmbg.getText(1,2)) + Integer.parseInt(jmbg.getText(7,8))) +
+                5*(Integer.parseInt(jmbg.getText(2,3)) + Integer.parseInt(jmbg.getText(8,9))) +
+                4*(Integer.parseInt(jmbg.getText(3,4)) + Integer.parseInt(jmbg.getText(9,10))) +
+                3*(Integer.parseInt(jmbg.getText(4,5)) + Integer.parseInt(jmbg.getText(10,11))) +
+                2*(Integer.parseInt(jmbg.getText(5,6)) + Integer.parseInt(jmbg.getText(11,12)))) % 11);
+
+
+        if(l>=1 && l<=9 && l!=k)
+            return false;
+
+        if(l>9 && k!=0)
+            return false;
+
         return true;
     }
 
@@ -176,62 +225,13 @@ public class Controller {
         return true;
     }
 
-    /*public SimpleStringProperty nameProperty() {
-        return name;
-    }
-    public String getName() {
-        return name.get();
-    }
-    public SimpleStringProperty lastNameProperty() {
-        return last_name;
-    }
-    public String getLastName() {
-        return last_name.get();
-    }
-    public SimpleStringProperty indexProperty() {
-        return index;
-    }
-    public String getIndex() {
-        return index.get();
-    }
-    public SimpleStringProperty JMBGProperty() {
-        return JMBG;
-    }
-    public String getJMBG() {
-        return JMBG.get();
-    }
-    public SimpleStringProperty dateProperty() {
-        return date;
-    }
-    public String getDate() {
-        return date.get();
-    }
-    public SimpleStringProperty adressProperty(){
-        return adress;
-    }
-    public String getAdress(){
-        return adress.get();
-    }
-    public SimpleStringProperty phoneProperty(){
-        return phone;
-    }
-    public String getPhone(){
-        return phone.get();
-    }
-    public SimpleStringProperty emailProperty(){
-        return email;
-    }
-    public String getEmail(){
-        return email.get();
-    }
-    */
     public boolean validnoIme(String novo_ime){
         if(novo_ime.length()>20 || novo_ime.length()<=0) return false;
         return true;
     }
     public void potvrdi(javafx.event.ActionEvent actionEvent) {
 
-        System.out.print(ime.getText()+" "+prezime.getText()+" "+broj_indeksa.getText()+" "+jmbg.getText()+" "+datum.getText()+" "+izbor.getValue()
+        System.out.print(ime.getText()+" "+prezime.getText()+" "+broj_indeksa.getText()+" "+jmbg.getText()+" "+datum.toString()+" "+izbor.getValue()
         +" "+adresa.getText()+" "+telefon.getText()+" "+mail.getText()+" "+odsjek.getValue()+" "+godina.getValue()+" "+ciklus.getValue());
         if(dugmad.getSelectedToggle().equals(redovan)) System.out.print(" redovan");
         if(dugmad.getSelectedToggle().equals(samofinansirajuci)) System.out.print(" samofinansirajuci");
