@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
 
-
+import org.apache.commons.validator.routines.EmailValidator;
 public class Controller {
 
     public TextField ime;
@@ -142,7 +142,7 @@ public class Controller {
             }
         });
 
-        /*mail.textProperty().addListener(new ChangeListener<String>() {
+        mail.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> obs, String o, String n) {
                 EmailValidator validator = EmailValidator.getInstance();
@@ -155,7 +155,6 @@ public class Controller {
                 }
             }
         });
-        */
 
         prezime.focusedProperty().addListener(new ChangeListener<Boolean>() {
         @Override
@@ -185,11 +184,12 @@ public class Controller {
             }
         }
     });
-        /*mail.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        mail.focusedProperty().addListener(new ChangeListener<Boolean>() {
         @Override
         public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
             if(!n){
-                if (validnoIme(mail.getText())) {
+                EmailValidator validator = EmailValidator.getInstance();
+                if (validator.isValid(mail.getText())) {
                     mail.getStyleClass().removeAll("poljeNijeIspravno");
                     mail.getStyleClass().add("poljeIspravno");
                 } else {
@@ -198,7 +198,7 @@ public class Controller {
                 }
             }
         }
-    });*/
+    });
         broj_indeksa.focusedProperty().addListener(new ChangeListener<Boolean>() {
         @Override
         public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {

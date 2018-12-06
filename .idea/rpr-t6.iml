@@ -5,6 +5,8 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/lib" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/commons-validator-1.6-src" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -22,5 +24,6 @@
     </orderEntry>
     <orderEntry type="library" name="org.testfx:testfx-junit5:4.0.15-alpha" level="project" />
     <orderEntry type="library" name="org.controlsfx:controlsfx:8.40.9" level="project" />
+    <orderEntry type="library" name="commons-validator-1.61" level="project" />
   </component>
 </module>
