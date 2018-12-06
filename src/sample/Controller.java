@@ -278,7 +278,7 @@ public class Controller {
     }
 
     private boolean validanDatum(LocalDate novo) {
-
+        //DatePicker.getValue() vraca LocalDate
         int dd = Integer.parseInt(jmbg.getText(0, 2));
         int mm = Integer.parseInt(jmbg.getText(2, 4));
         int ggg = Integer.parseInt(jmbg.getText(4, 7));
@@ -356,7 +356,7 @@ public class Controller {
         if(ime.getText().length() == 0 || prezime.getText().length() == 0 || broj_indeksa.getText().length() == 0 ||
                 mail.getText().length() == 0 || jmbg.getText().length() == 0 || datum.getValue() == null)
             return false;
-
+        //getStyleClass vraca ObservableList<String> - imena klasa u css-u
         ArrayList<ObservableList<String>> validno = new ArrayList<>();
 
         validno.add(ime.getStyleClass());
