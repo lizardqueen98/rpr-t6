@@ -1,39 +1,17 @@
 package sample;
 
-import javafx.beans.property.SimpleStringProperty;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.control.*;
-import org.controlsfx.validation.ValidationSupport;
-//import org.apache.commons.validator.routines.EmailValidator;
-import org.controlsfx.validation.Validator;
-//import java.awt.event.ActionEvent;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.ZoneId;
-import java.util.Date;
-//import javafx.beans.value.ChangeListener;
-//import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-
 import javafx.stage.Stage;
-import org.controlsfx.validation.Validator;
 
-
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.ResourceBundle;
-
-import org.controlsfx.validation.ValidationSupport;
 
 
 public class Controller {
@@ -149,6 +127,21 @@ public class Controller {
                 }
             }
         });
+        ime.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
+                if (!n){
+                    if (validnoIme(ime.getText())) {
+                        ime.getStyleClass().removeAll("poljeNijeIspravno");
+                        ime.getStyleClass().add("poljeIspravno");
+                    } else {
+                        ime.getStyleClass().removeAll("poljeIspravno");
+                        ime.getStyleClass().add("poljeNijeIspravno");
+                    }
+                }
+            }
+        });
+
         /*mail.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> obs, String o, String n) {
@@ -162,54 +155,108 @@ public class Controller {
                 }
             }
         });
-*/
-    }
-    /*ValidationSupport validation = new ValidationSupport();
-        ime.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        */
+
+        prezime.focusedProperty().addListener(new ChangeListener<Boolean>() {
         @Override
         public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
-            if(!n)
-                validation.registerValidator(ime, Validator.createEmptyValidator("Prazno polje"));
-        }
-    });
-       prezime.focusedProperty().addListener(new ChangeListener<Boolean>() {
-        @Override
-        public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
-            if(!n)
-                validation.registerValidator(prezime,Validator.createEmptyValidator("Prazno polje"));
-        }
-    });
+            if(!n){
+                if (validnoIme(prezime.getText())) {
+                    prezime.getStyleClass().removeAll("poljeNijeIspravno");
+                    prezime.getStyleClass().add("poljeIspravno");
+                } else {
+                    prezime.getStyleClass().removeAll("poljeIspravno");
+                    prezime.getStyleClass().add("poljeNijeIspravno");
+                    }
+                }
+            }
+        });
         jmbg.focusedProperty().addListener(new ChangeListener<Boolean>() {
         @Override
         public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
-            if(!n)
-                validation.registerValidator(jmbg, Validator.createEmptyValidator("Prazno polje"));
+            if(!n){
+                if (validanJmbg(jmbg.getText())) {
+                    jmbg.getStyleClass().removeAll("poljeNijeIspravno");
+                    jmbg.getStyleClass().add("poljeIspravno");
+                } else {
+                    jmbg.getStyleClass().removeAll("poljeIspravno");
+                    jmbg.getStyleClass().add("poljeNijeIspravno");
+                }
+            }
         }
     });
-        mail.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        /*mail.focusedProperty().addListener(new ChangeListener<Boolean>() {
         @Override
         public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
-            if(!n)
-                validation.registerValidator(mail,Validator.createEmptyValidator("Prazno polje"));
+            if(!n){
+                if (validnoIme(mail.getText())) {
+                    mail.getStyleClass().removeAll("poljeNijeIspravno");
+                    mail.getStyleClass().add("poljeIspravno");
+                } else {
+                    mail.getStyleClass().removeAll("poljeIspravno");
+                    mail.getStyleClass().add("poljeNijeIspravno");
+                }
+            }
         }
-    });
+    });*/
         broj_indeksa.focusedProperty().addListener(new ChangeListener<Boolean>() {
         @Override
         public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
-            if(!n)
-                validation.registerValidator(broj_indeksa,Validator.createEmptyValidator("Prazno polje"));
+            if(!n){
+                if (validanIndeks(broj_indeksa.getText())) {
+                    broj_indeksa.getStyleClass().removeAll("poljeNijeIspravno");
+                    broj_indeksa.getStyleClass().add("poljeIspravno");
+                } else {
+                    broj_indeksa.getStyleClass().removeAll("poljeIspravno");
+                    broj_indeksa.getStyleClass().add("poljeNijeIspravno");
+                }
+            }
         }
     });
         datum.focusedProperty().addListener(new ChangeListener<Boolean>() {
         @Override
         public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
-            if(!n)
-                validation.registerValidator(datum,Validator.createEmptyValidator("Prazno polje"));
+            if(!n){
+                if (validanDatum(datum.getValue())) {
+                    datum.getStyleClass().removeAll("poljeNijeIspravno");
+                    datum.getStyleClass().add("poljeIspravno");
+                } else {
+                    datum.getStyleClass().removeAll("poljeIspravno");
+                    datum.getStyleClass().add("poljeNijeIspravno");
+                }
+            }
         }
     });
+        adresa.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
+                if(!n){
+                    if (validnaAdresa(adresa.getText())) {
+                        adresa.getStyleClass().removeAll("poljeNijeIspravno");
+                        adresa.getStyleClass().add("poljeIspravno");
+                    } else {
+                        adresa.getStyleClass().removeAll("poljeIspravno");
+                        adresa.getStyleClass().add("poljeNijeIspravno");
+                    }
+                }
+            }
+        });
+        telefon.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs, Boolean o, Boolean n) {
+                if(!n){
+                    if (validanTelefon(telefon.getText())) {
+                        telefon.getStyleClass().removeAll("poljeNijeIspravno");
+                        telefon.getStyleClass().add("poljeIspravno");
+                    } else {
+                        telefon.getStyleClass().removeAll("poljeIspravno");
+                        telefon.getStyleClass().add("poljeNijeIspravno");
+                    }
+                }
+            }
+        });
 
 }
-*/
     private boolean validanTelefon(String novo) {
         return novo.matches("[0-9]+");
     }
@@ -305,13 +352,53 @@ public class Controller {
         }
         return true;
     }
+    private boolean Ispravno() {
+        if(ime.getText().length() == 0 || prezime.getText().length() == 0 || broj_indeksa.getText().length() == 0 ||
+                mail.getText().length() == 0 || jmbg.getText().length() == 0 || datum.getValue() == null)
+            return false;
+
+        ArrayList<ObservableList<String>> validno = new ArrayList<>();
+
+        validno.add(ime.getStyleClass());
+        validno.add(prezime.getStyleClass());
+        validno.add(jmbg.getStyleClass());
+        validno.add(broj_indeksa.getStyleClass());
+        validno.add(adresa.getStyleClass());
+        validno.add(telefon.getStyleClass());
+        validno.add(mail.getStyleClass());
+        validno.add(datum.getStyleClass());
+
+        for(ObservableList<String> o : validno)
+        {
+            if(o.contains("poljeNijeIspravno"))
+                return false;
+        }
+        return true;
+    }
+    private void upozorenje(ActionEvent actionEvent)
+    {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Greška");
+        alert.setHeaderText("Forma nije validna!");
+        alert.setContentText("Unesite ispravne podatke!");
+        alert.showAndWait();
+    }
+
     public void potvrdi(javafx.event.ActionEvent actionEvent) {
 
-        System.out.print(ime.getText()+" "+prezime.getText()+" "+broj_indeksa.getText()+" "+jmbg.getText()+" "+datum.getValue()+" "+izbor.getValue()
-        +" "+adresa.getText()+" "+telefon.getText()+" "+mail.getText()+" "+odsjek.getValue()+" "+godina.getValue()+" "+ciklus.getValue());
-        if(dugmad.getSelectedToggle().equals(redovan)) System.out.print(" redovan");
-        if(dugmad.getSelectedToggle().equals(samofinansirajuci)) System.out.print(" samofinansirajuci");
-        if(check.isSelected()) System.out.print(" pripada posebnim borackim kategorijama");
+        if(!Ispravno())
+            upozorenje(actionEvent);
+        else {
+            System.out.print(ime.getText() + " " + prezime.getText() + " " + broj_indeksa.getText() + " " + jmbg.getText() + " " + datum.getValue() + " " + izbor.getValue()
+                    + " " + adresa.getText() + " " + telefon.getText() + " " + mail.getText() + " " + odsjek.getValue() + " " + godina.getValue() + " " + ciklus.getValue());
+            if (dugmad.getSelectedToggle().equals(redovan)) System.out.print(" redovan");
+            if (dugmad.getSelectedToggle().equals(samofinansirajuci)) System.out.print(" samofinansirajuci");
+            if (check.isSelected()) System.out.print(" pripada posebnim borackim kategorijama");
+            //da se prozor zatvori nakon pritiska na potvrdi
+            Node n = (Node) actionEvent.getSource();
+            Stage stage = (Stage) n.getScene().getWindow();
+            stage.close();
+        }
     }
 
 }
